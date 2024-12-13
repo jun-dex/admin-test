@@ -1,23 +1,23 @@
 const menuData = [
   {
-    title: "공통",
+    title: "menu.common", // JSON의 "menu.common"에 연결
     items: [
-      { name: "사용자 관리", link: "/common/users" },
-      { name: "권한 설정", link: "/common/permissions" },
+      { name: "menu.commonUsers", link: "/common/users" },
+      { name: "menu.commonPermissions", link: "/common/permissions" },
     ],
   },
   {
-    title: "DexLab",
+    title: "menu.dexlab",
     items: [
-      { name: "지갑 관리", link: "/dexlab/wallet" },
-      { name: "거래 내역", link: "/dexlab/transactions" },
+      { name: "menu.dexlabWallet", link: "/dexlab/wallet" },
+      { name: "menu.dexlabTransactions", link: "/dexlab/transactions" },
     ],
   },
   {
-    title: "Mome",
+    title: "menu.mome",
     items: [
-      { name: "토큰 관리", link: "/mome/tokens" },
-      { name: "통계", link: "/mome/stats" },
+      { name: "menu.momeTokens", link: "/mome/tokens" },
+      { name: "menu.momeStats", link: "/mome/stats" },
     ],
   },
 ];

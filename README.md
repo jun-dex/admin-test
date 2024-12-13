@@ -22,6 +22,9 @@ pnpm dev
 ```
 root
 ├── public/               # 정적 파일 (이미지, 아이콘 등)
+│   ├── locales/          # 다국어 번역 파일 저장 디렉토리
+│   │   ├── en/           # 영어 번역 파일
+│   │   ├── ko/           # 한국어 번역 파일
 ├── src/
 │   ├── components/       # 재사용 가능한 UI 컴포넌트
 │   ├── contexts/         # React Context API로 전역 상태 관리

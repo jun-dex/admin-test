@@ -1,0 +1,12 @@
+{
+  "welcome": "DexLab 관리 페이지에 오신 것을 환영합니다!",
+  "menu.common": "공통",
+  "menu.commonUsers": "사용자 관리",
+  "menu.commonPermissions": "권한 설정",
+  "menu.dexlab": "DexLab",
+  "menu.dexlabWallet": "지갑 관리",
+  "menu.dexlabTransactions": "거래 내역",
+  "menu.mome": "Mome",
+  "menu.momeTokens": "토큰 관리",
+  "menu.momeStats": "통계"
+}
