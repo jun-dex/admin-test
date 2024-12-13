@@ -25,6 +25,7 @@ root
 ├── src/
 │   ├── components/       # 재사용 가능한 UI 컴포넌트
 │   ├── contexts/         # React Context API로 전역 상태 관리
+│   ├── data/             # 정적 데이터 관리 (e.x, 사이드바 메뉴 리스트 관리)
 │   ├── hooks/            # 커스텀 React Hooks
 │   ├── layouts/          # 페이지에서 공통적으로 사용하는 레이아웃 관리
 │   ├── utils/            # 유틸리티 함수 및 상수

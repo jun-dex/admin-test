@@ -1,12 +1,11 @@
 import React from "react";
+import Sidebar from "@/components/Sidebar";
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex h-screen">
       {/* 왼쪽 사이드바 */}
-      <aside className="w-64 bg-gray-800 text-white flex flex-col">
-        hello
-      </aside>
+      <Sidebar />
 
       {/* 메인 컨텐츠 페이지 */}
       <div className="flex-1 flex flex-col">
