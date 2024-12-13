@@ -1,40 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# DexLab Admin
 
-## Getting Started
+DexLab Admin 프로젝트에 오신 것을 환영해요. 지금의 프로젝트는 DexLab 서비스 관리를 위한 통합 어드민 프로젝트로써 프런트엔드를 담당하고 있습니다.
 
-First, run the development server:
+## 개발 환경
+- Node.js 18 version
+- TypeScript
+- Next JS with the pnpm
+- Tailwind CSS
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+## 🛠️ 설치 및 실행 방법
+
+```
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 디렉토리 구조
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+프로젝트는 직관적이고 유지보수가 용이하도록 구성
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+root
+├── public/               # 정적 파일 (이미지, 아이콘 등)
+├── src/
+│   ├── components/       # 재사용 가능한 UI 컴포넌트
+│   ├── contexts/         # React Context API로 전역 상태 관리
+│   ├── hooks/            # 커스텀 React Hooks
+│   ├── layouts/          # 페이지에서 공통적으로 사용하는 레이아웃 관리
+│   ├── utils/            # 유틸리티 함수 및 상수
+│   ├── pages/            # Next.js 라우트 및 페이지 구성
+│   └── styles/           # 글로벌 스타일 및 Tailwind 설정
+├── .env.local            # 환경 변수 파일
+├── tailwind.config.js    # TailwindCSS 설정 파일
+├── next.config.js        # Next.js 설정 파일
+├── tsconfig.json         # TypeScript 설정 파일
+└── package.json          # 프로젝트 메타데이터
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 디렉토리 설명
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- public/: 정적 자원을 관리합니다. (이미지, 폰트 등)
+- src/components/: 재사용 가능한 UI 컴포넌트를 작성합니다.
+- src/contexts/: 프로젝트에서 전역 상태를 공유할 때 작성합니다.
+- src/hooks/: 커스텀 React Hooks를 작성합니다.
+- src/layouts/: 페이지별로 사용하는 레이아웃을 작성합니다.
+- src/utils/: API 요청, 상수, 헬퍼 함수 등을 포함합니다.
+- src/pages/: Next.js의 라우트와 페이지를 정의합니다.
+- src/styles/: 글로벌 CSS 및 Tailwind 관련 스타일을 관리합니다.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🌟 기타 참고 사항
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+이 프로젝트는 Next.js와 TailwindCSS를 기반으로 구축되었습니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+프로젝트를 확장하거나 커스터마이징하려면, 각 디렉토리의 역할에 맞는 파일을 수정해주세요.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+자세한 내용은 프로젝트 문서를 참고하거나 관리자에게 문의하세요.
