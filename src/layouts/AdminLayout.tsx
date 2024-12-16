@@ -13,7 +13,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {/* 상단 헤더 */}
         <Navbar />
         {/* 페이지 컨텐츠 */}
-        <main className="p-6 bg-gray-100 flex-1">{children}</main>
+        <main className="p-6 bg-gray-100 flex-1 md:ml-64">{children}</main>
       </div>
     </div>
   );
