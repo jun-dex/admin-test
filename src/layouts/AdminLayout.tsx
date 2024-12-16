@@ -1,15 +1,8 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const router = useRouter();
-
-  const switchLanguage = (locale: string) => {
-    router.push(router.pathname, router.asPath, { locale });
-  };
-
   return (
     <div className="flex h-screen">
       {/* 왼쪽 사이드바 */}

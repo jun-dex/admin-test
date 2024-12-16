@@ -12,20 +12,14 @@ const Navbar: React.FC = () => {
   // 현재 언어
   const currentLocale = router.locale || "ko";
 
-  // 언어 변경 함수
   useEffect(() => {
-    let locale = "ko";
-    if (enabled) {
-      locale = "en";
-    }
-    switchLanguage(locale);
-  }, [enabled])
+    const locale = enabled ? "en" : "ko";
 
-  const switchLanguage = (locale: string) => {
+    // 언어 변경 함수 정의
     if (locale !== currentLocale) {
       router.push(router.pathname, router.asPath, { locale });
     }
-  };
+  }, [enabled, currentLocale, router]);
 
   return (
     <header className="h-16 bg-white shadow-md flex justify-end items-center px-10">
