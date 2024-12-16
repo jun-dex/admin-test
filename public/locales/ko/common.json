@@ -8,5 +8,7 @@
   "menu.dexlabTransactions": "거래 내역",
   "menu.mome": "Mome",
   "menu.momeTokens": "토큰 관리",
-  "menu.momeStats": "통계"
+  "menu.momeStats": "통계",
+  "profile": "프로필 보기",
+  "logout": "로그아웃"
 }

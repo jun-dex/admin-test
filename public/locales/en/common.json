@@ -8,5 +8,7 @@
   "menu.dexlabTransactions": "Transaction History",
   "menu.mome": "Mome",
   "menu.momeTokens": "Token Management",
-  "menu.momeStats": "Statistics"
+  "menu.momeStats": "Statistics",
+  "profile": "Profile",
+  "logout": "Logout"
 }
