@@ -3,19 +3,19 @@ import { Menu, MenuItem, MenuItems, MenuButton, Transition, Switch } from "@head
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const [enabled, setEnabled] = useState(false)
 
-  // 현재 언어
-  const currentLocale = router.locale || "ko";
-
+  const currentLocale = router.locale || "ko";  // 현재 언어
+  const { data: session } = useSession();       // 세션(로그인) 데이터
   useEffect(() => {
     const locale = enabled ? "en" : "ko";
 
-    // 언어 변경 함수 정의
+    // 언어 변경
     if (locale !== currentLocale) {
       router.push(router.pathname, router.asPath, { locale });
     }
@@ -27,9 +27,18 @@ const Navbar: React.FC = () => {
       <Menu as="div" className="relative">
         <MenuButton className="flex items-center space-x-2 focus:outline-none">
           {/* 프로필 이미지 */}
-          <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-bold">
-            U {/* 디폴트 프로필 초기 */}
-          </div>
+          {session?.user?.image ? (
+            <img
+              src={session.user.image}
+              alt="U"
+              className="w-10 h-10 rounded-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-bold">
+              {session?.user?.name?.charAt(0).toUpperCase() || "U"}
+            </div>
+          )}
         </MenuButton>
         <Transition
           as={Fragment}
@@ -57,6 +66,7 @@ const Navbar: React.FC = () => {
               <MenuItem>
                 {({ active }) => (
                   <button
+                    onClick={() => signOut()}
                     className={`${active ? "bg-blue-500 text-white" : "text-gray-900"
                       } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
