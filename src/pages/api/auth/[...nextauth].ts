@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { signInWithCredential, GoogleAuthProvider } from "firebase/auth";
+import { signInWithCredential, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
 export default NextAuth({
@@ -40,11 +40,29 @@ export default NextAuth({
           console.error("Error exchanging Google token with Firebase:", error);
         }
       }
+
+      // Google ID 토큰 저장
+      if (account) {
+        token.googleIdToken = account.id_token;
+        token.accessToken = account.access_token;
+      }
+
       return token;
     },
     async session({ session, token }) {
+      // 세션 만료 조건 확인 (토큰 없으면 로그아웃)
+      if (!token) {
+        try {
+          await signOut(auth);
+        } catch (error) {
+          console.error("Error during Firebase logout:", error);
+        }
+      }
+
       // 세션에 Firebase ID 토큰 추가
-      session.accessToken = token.firebaseIdToken as string | undefined;
+      session.googleIdToken = token.googleIdToken as string | undefined;    // Google ID 토큰
+      session.accessToken = token.accessToken as string | undefined;        // Google jwt 토큰
+      session.firebaseToken = token.firebaseIdToken as string | undefined;  // Firebase jwt 토큰
       return session;
     },
   },
