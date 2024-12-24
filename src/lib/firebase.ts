@@ -1,4 +1,4 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -10,7 +10,7 @@ const firebaseConfig = {
 };
 
 // Firebase 앱 초기화 (중복 방지)
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 
 export const auth = getAuth(app);
 export default app;

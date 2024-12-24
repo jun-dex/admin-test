@@ -2,17 +2,79 @@ import PageLayout from "@/layouts/PageLayout";
 import { useEffect, ReactElement } from "react";
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from "next/router";
+import { signInWithCustomToken } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { isAuthCompleted, clearAuthCompleted, setAuthCompleted } from "@/utils/authFlag";
 
 const LoginPage = () => {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const router = useRouter();
 
   // 이미 로그인된 상태일 때 메인 페이지로 리다이렉트
   useEffect(() => {
-    if (status === "authenticated") {
-      router.replace("/"); // 메인 페이지로 리다이렉트
-    }
-  }, [status, router]);
+    const verifyAndSignIn = async () => {
+      if (
+        status === "authenticated" &&
+        session?.firebaseToken &&
+        !isAuthCompleted()
+      ) {
+        // 구글 로그인 인증 완료, Firbase 동기화 전인 상태
+        // 디버깅 용도 추후 삭제
+        // console.log("User is authenticated:", session);
+        try {
+          // 1. 로그인 후 우리 서버로 토큰 검증 요청
+          const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
+          const response = await fetch(`${API_BASE_URL}/auth/verify-token`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session.firebaseToken}`, // Firebase 토큰 헤더에 추가
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`Failed to verify token: ${response.status}`);
+          }
+
+          const data: { customToken: string } = await response.json();
+
+          try {
+            // 2. 서버 검증 완료 후 Firebase 커스텀 토큰으로 동기화
+            if (!auth.currentUser) {
+              const userCredential = await signInWithCustomToken(
+                auth,
+                data.customToken
+              );
+              // 디버깅 용도 추후 삭제
+              console.log("After login, currentUser:", auth.currentUser);
+              console.log("User info:", userCredential.user);
+            }
+          } catch (error) {
+            console.error("Error logging in with custom token:", error);
+            throw error; // 외부 catch 블록으로 에러 전달
+          }
+          // 디버깅 용도 추후 삭제
+          // console.log("Server verified token and issued API token:", data);
+
+          // 인증 완료 플래그 설정
+          setAuthCompleted();
+
+          // 메인 페이지로 리다이렉트
+          router.replace("/");
+        } catch (err) {
+          console.error("Authentication error:", err);
+        }
+      } else if (status === "authenticated" && isAuthCompleted()) {
+        // 이미 인증이 완료된 경우 메인 페이지로 리다이렉트
+        router.replace("/");
+      } else if (status === "unauthenticated") {
+        // 인증되지 않은 상태일 때 플래그 초기화
+        clearAuthCompleted();
+      }
+    };
+
+    verifyAndSignIn();
+  }, [status, router, session?.firebaseToken]);
 
   if (status === "loading") {
     return <div>Loading...</div>;
